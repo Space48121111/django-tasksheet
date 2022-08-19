@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    {% if lastest_room_list %}
+      <ul>
+        {% for room in lastest_room_list %}
+          <li><a href="{% url 'task:detail' room.id %}">{{room.room_text}}</a></li>
+        (% endfor %)
+      </ul>
+    {% else %}
+      <p>No rooms are available.</p>
+    {% endif %}
+  </body>
+</html>

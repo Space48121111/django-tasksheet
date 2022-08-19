@@ -1,0 +1,33 @@
+{# {% logic template %} {{render variables template }} #}
+
+{% block content %}
+{% if user.is_authenticated %}
+  Hi {{ user.username }}!
+  <p><a href="{% url 'logout' %}">Log Out</a></p>
+  {# {% logic template %} {{render variables template }} #}
+
+  <h1>Members</h1>
+
+  <table border="1">
+  {# <table border="0"> #}
+
+  {% for x in mem %}
+    <tr>
+    {# <td>{{ x.id }}</td> #}
+    <td><a href="update/{{ x.id }}">{{ x.id }}</a></td>
+    <td>{{ x.firstname }}</td>
+    <td>{{ x.lastname }}</td>
+    <td><a href="delete/{{ x.id }}">Del</a></td>
+    </tr>
+  {% endfor %}
+  </table>
+
+  <p>
+  <a href="add/">Add member</a>
+  </p>
+
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">Log In</a>
+{% endif %}
+{% endblock %}

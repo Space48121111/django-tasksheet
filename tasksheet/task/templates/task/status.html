@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>{{ room.room_text}}</h1></legend>
+    <ul>
+      {% for status in room.status_set.all %}
+        <li>
+          {{ status.status_text }} -- {{status.status }} status {{ status.status|pluralize }}
+        </li>
+      {% endfor %}
+    </ul>
+
+    <a href="% url 'task:detail' room.id %">Go back?</a>
+  </body>
+</html>

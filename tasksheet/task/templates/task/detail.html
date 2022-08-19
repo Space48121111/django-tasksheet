@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <form action="{% url 'task:status' room.id %}" method="post">
+      {% csrf_token %}
+      <fieldset>
+        <legend><h1>{{ room.room_text}}</h1></legend>
+        {% for status in room.status_set.all %}
+          <input type="radio" id="status{{ forloop.counter }}" value="{{ status.id }}">
+          <label for="status{{ forloop.counter}}">{{ status.status_text}}</label><br>
+        {% endfor %}
+      </fieldset>
+      <input type="submit" value="Status">
+    </form>
+  </body>
+</html>
