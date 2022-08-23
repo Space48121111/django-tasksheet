@@ -5,16 +5,18 @@
     <title></title>
   </head>
   <body>
-    <form action="{% url 'task:status' room.id %}" method="post">
+    <form action="{% url 'task:rate' room.id %}" method="post">
       {% csrf_token %}
       <fieldset>
         <legend><h1>{{ room.room_text}}</h1></legend>
+        {%if error_message %}<p><strong> {{ error_message }}</strong></p>
+        {% endif %}
         {% for status in room.status_set.all %}
-          <input type="radio" id="status{{ forloop.counter }}" value="{{ status.id }}">
-          <label for="status{{ forloop.counter}}">{{ status.status_text}}</label><br>
+          <input type="radio" name='status' id="status{{ forloop.counter }}" value="{{ status.id }}">
+          <label for="status{{ forloop.counter }}">{{ status.status_text}}</label><br>
         {% endfor %}
       </fieldset>
-      <input type="submit" value="Status">
+      <input type="submit" value="Rate">
     </form>
   </body>
 </html>

@@ -5,15 +5,14 @@
     <title></title>
   </head>
   <body>
-    <h1>{{ room.room_text}}</h1></legend>
+    <h1>{{ room.room_text}}</h1>
     <ul>
       {% for status in room.status_set.all %}
-        <li>
-          {{ status.status_text }} -- {{status.rates }} rate {{ status.rates|pluralize }}
-        </li>
+        <li>{{ status.status_text }} -- {{ status.rates }} rate {{ status.rates|pluralize }}</li>
       {% endfor %}
     </ul>
 
-    <a href="% url 'task:detail' room.id %">Rate again?</a>
+    <a href="{% url 'task:detail' room.id %}">Rate again?</a>
+
   </body>
 </html>
