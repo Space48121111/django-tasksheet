@@ -9,10 +9,11 @@ from .models import Room, Status
 
 '''
 def index(req):
-    lastest_room_list = Room.objects.order_by('-pub_date')[:5]
-    context = {'lastest_room_list': lastest_room_list}
+    latest_room_list = Room.objects.order_by('-pub_date')[:5]
+    context = {'latest_room_list': latest_room_list}
     return render(req, 'task/index.html', context)
     # return HttpResponse("Hello, world. Task index.")
+
 '''
 class IndexView(generic.ListView):
     template_name = 'task/index.html'

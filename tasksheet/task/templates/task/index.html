@@ -5,9 +5,9 @@
     <title></title>
   </head>
   <body>
-    {% if lastest_room_list %}
+    {% if latest_room_list %}
       <ul>
-        {% for room in lastest_room_list %}
+        {% for room in latest_room_list %}
           <li><a href="{% url 'task:detail' room.id %}">{{room.room_text}}</a></li>
         {% endfor %}
       </ul>
