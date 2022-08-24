@@ -3,19 +3,33 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 
 from django.urls import reverse
+from django.views import generic
 
 from .models import Room, Status
 
-
+'''
 def index(req):
     lastest_room_list = Room.objects.order_by('-pub_date')[:5]
     context = {'lastest_room_list': lastest_room_list}
     return render(req, 'task/index.html', context)
     # return HttpResponse("Hello, world. Task index.")
+'''
+class IndexView(generic.ListView):
+    template_name = 'task/index.html'
+    context_object_name = 'latest_room_list'
+    def get_queryset(self):
+        return Room.objects.order_by('-pub_date')[:5]
+'''
 def detail(req, room_id):
     room = get_object_or_404(Room, pk=room_id)
     return render(req, 'task/detail.html', {'room': room})
     # return HttpResponse('You are looking at room %s.' % room_id)
+'''
+
+class DetailView(generic.DetailView):
+    model = Room
+    template_name = 'task/detail.html'
+
 def rate(req, room_id):
     room = get_object_or_404(Room, pk=room_id)
     try:
@@ -29,10 +43,15 @@ def rate(req, room_id):
         return HttpResponseRedirect(reverse('task:results', args=(room.id,)))
         # return HttpResponse(resp % room_id)
 
+'''
 def results(req, room_id):
     room = get_object_or_404(Room, pk=room_id)
     return render(req, 'task/results.html', {'room': room})
+'''
 
+class ResultsView(generic.DetailView):
+    model = Room
+    template_name = 'task/results.html'
 
 
 
