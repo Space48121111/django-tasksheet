@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 
 from django.urls import reverse
 from django.views import generic
+from django.utils import timezone
 
 from .models import Room, Status
 
@@ -19,7 +20,9 @@ class IndexView(generic.ListView):
     template_name = 'task/index.html'
     context_object_name = 'latest_room_list'
     def get_queryset(self):
-        return Room.objects.order_by('-pub_date')[:5]
+        # return Room.objects.order_by('-pub_date')[:5]
+        # only the ones in the past, now the future
+        return Room.objects.filter(pub_date_lte=timezone.now()).order_by('-pub_date')[:5]
 '''
 def detail(req, room_id):
     room = get_object_or_404(Room, pk=room_id)

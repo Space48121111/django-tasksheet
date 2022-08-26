@@ -14,7 +14,11 @@ class Room(models.Model):
     # ? timezone hasn't been changed, still the UTC time
     # instead of Europe/Helsinki
     def was_published_recently(self):
-        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+        # return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+        now = timezone.now()
+        # <= now exclude future case
+        return now - datetime.timedelta(days=1) <= self.pub_date <= now
+
 
 class Status(models.Model):
     # foreignkey status_set
