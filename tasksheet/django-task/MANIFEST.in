@@ -1,0 +1,7 @@
+include LICENSE
+include README.rst
+include pyproject.toml
+
+recursive-include task/static *
+recursive-include task/templates *
+recursive-include docs *
