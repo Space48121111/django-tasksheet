@@ -3,6 +3,9 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <!-- abs url of static files -->
+    {% load static%}
+    <link rel="stylesheet" href="{% static 'task/style.css' %}">
   </head>
   <body>
     {% if latest_room_list %}

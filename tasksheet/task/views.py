@@ -22,7 +22,7 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         # return Room.objects.order_by('-pub_date')[:5]
         # only the ones in the past, now the future
-        return Room.objects.filter(pub_date_lte=timezone.now()).order_by('-pub_date')[:5]
+        return Room.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
 '''
 def detail(req, room_id):
     room = get_object_or_404(Room, pk=room_id)
@@ -33,6 +33,10 @@ def detail(req, room_id):
 class DetailView(generic.DetailView):
     model = Room
     template_name = 'task/detail.html'
+
+    def get_queryset(self):
+        # _lte less than or equal to
+        return Room.objects.filter(pub_date__lte=timezone.now())
 
 def rate(req, room_id):
     room = get_object_or_404(Room, pk=room_id)
@@ -46,13 +50,6 @@ def rate(req, room_id):
         # after post, redirect
         return HttpResponseRedirect(reverse('task:results', args=(room.id,)))
         # return HttpResponse(resp % room_id)
-
-def get_queryset(self):
-    return Room.objects.filter(pub_date_lte=timezone.now())
-
-
-
-
 
 
 '''
