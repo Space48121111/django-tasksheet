@@ -47,6 +47,14 @@ def rate(req, room_id):
         return HttpResponseRedirect(reverse('task:results', args=(room.id,)))
         # return HttpResponse(resp % room_id)
 
+def get_queryset(self):
+    return Room.objects.filter(pub_date_lte=timezone.now())
+
+
+
+
+
+
 '''
 def results(req, room_id):
     room = get_object_or_404(Room, pk=room_id)
