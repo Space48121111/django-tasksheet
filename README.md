@@ -1,4 +1,4 @@
-django-task packaging version 0.1 (coupled with pytest)
+django-task packaging version 0.1 (coupled with pytest) (--no-use-pep517)
   
   django-task-0.1.tar.gz
   
